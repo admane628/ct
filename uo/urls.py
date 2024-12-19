@@ -8,4 +8,7 @@ urlpatterns = [
     path("formations/", views.formations, name="formations"),
     path("ue/<id>", views.ue_view, name="ue_view"),
     path("ues/", views.ues, name="ues"),
+
+
+    path("exclusive/", views.exclusive, name="exclusive"), #q20)
 ]

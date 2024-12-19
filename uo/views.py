@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Formation, UE
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 # Create your views here.
 def about(request):
@@ -21,3 +23,53 @@ def formations(request):
 def ues(request):
     ues = UE.objects.all()
     return render(request, "ues.html", {"ues":ues})
+
+
+@login_required
+def exclusive(request): #q20)
+    responsables =  []
+    fms = Formation.objects.all()
+    for fm in fms:
+        if not fm.responsable in responsables:
+            responsables.append(fm.responsable)
+
+    if not request.user in responsables and not request.user.is_superuser:
+        return HttpResponse('Unauthorized', status=401)
+
+    ues = UE.objects.all()
+
+    data = []
+    for formation in fms:
+        ue_attaches = UE.objects.filter(formations=fm)
+        nombre_ue_attache = ue_attaches.count()
+        responsables_noms =  []
+
+        volume_total_cm = 0
+        volume_total_td = 0
+        volume_total_tp = 0
+        volume_total_credits = 0
+
+        for ue_attache in ue_attaches:
+            for r in ue_attache.responsables.all():
+                responsables_noms.append(r.last_name + " " + r.first_name)
+
+            volume_total_cm = ue_attache.CM
+            volume_total_td = ue_attache.TD
+            volume_total_tp = ue_attache.TP
+            volume_total_credits = ue_attache.credits
+
+        volume_total_heures_equivalent_cm = volume_total_cm / 1.5 ## 1h de CM compte 1h30
+
+        data.append({
+            "id": formation.id,
+            "intitule": formation.intitule,
+            "nombre_ue_attache": nombre_ue_attache,
+            "responsables": sorted(responsables_noms),
+            "volume_total_cm": volume_total_cm,
+            "volume_total_td": volume_total_td,
+            "volume_total_tp": volume_total_tp,
+            "volume_total_credits": volume_total_credits,
+            "volume_total_heures_equivalent_cm": volume_total_heures_equivalent_cm
+        })
+
+    return render(request, "exclusive.html", {"data": data})

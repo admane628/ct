@@ -1,0 +1,37 @@
+{% for formation in data %}
+  {{formation.intitule}}: <a class="{{formation.id}}" onclick="afficher(this)" href="#">Afficher informations</a> <br>
+
+  <div class="f{{formation.id}}" style='display:none'>
+      "lien": <a href="{% url 'formation' formation.id %}">{{formation.intitule}}</a> <br>
+      "id": {{formation.id}} <br>
+      "intitule": {{formation.intitule}} <br>
+      "nombre_ue_attache": {{formation.nombre_ue_attache}} <br>
+      "responsables": <br>
+
+      {% for r in formation.responsables %}
+        {{r}}<br>
+      {% endfor %}<br>
+      "volume_total_cm": {{formation.volume_total_cm}} <br>
+      "volume_total_td": {{formation.volume_total_td}} <br>
+      "volume_total_tp": {{formation.volume_total_tp}} <br>
+      "volume_total_credits": {{formation.volume_total_credits}} <br>
+      "volume_total_heures_equivalent_cm": {{formation.volume_total_heures_equivalent_cm}} <br>
+
+  </div>
+{% endfor %}
+
+<script type="text/javascript">
+  function afficher(ahref){
+    formationID = ahref.className;
+
+    if (ahref.innerText == "Afficher informations"){
+      ahref.innerText = "Cacher informations"
+      document.querySelector("div.f"+formationID).style="display:block"
+    }
+
+    else {
+      ahref.innerText = "Afficher informations"
+      document.querySelector("div.f"+formationID).style="display:none"
+    }
+  }
+</script>
