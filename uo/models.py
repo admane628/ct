@@ -10,3 +10,11 @@ def create_enseignants(sender, **kwargs):
     User.objects.get_or_create(username='e2', email='e2@e.com', password='p')
     User.objects.get_or_create(username='e3', email='e3@e.com', password='p')
     User.objects.get_or_create(username='e4', email='e4@e.com', password='p')
+
+class Formation(models.Model):
+    intitule = models.CharField(max_length =100)
+    description = models.TextField()
+    responsable = models.OneToOneField(User, blank=True, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.intitule
