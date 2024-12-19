@@ -1,0 +1,19 @@
+
+titre: {{ue.titre}} </br>
+description: {{ue.description}} </br>
+CM: {{ue.CM}} </br>
+TD: {{ue.TD}} </br>
+TP: {{ue.TP}} </br>
+credits: {{ue.titre}} </br></br>
+formations:</br></br>
+
+  {% for f in ue.formations.all %}
+    <a href="{% url 'formation' f.id %}">{{f.intitule}}</a>
+  {% endfor %}
+
+</br></br>
+
+responsables:</br></br>
+  {% for r in ue.responsables.all %}
+    responsable: {{r.username}}</br>
+  {% endfor %}

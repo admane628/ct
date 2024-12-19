@@ -7,7 +7,7 @@
 </br>
       {% if ues %}
             {% for ue in ues %}
-              ue: {{ue.titre}}
+              <a href="{% url 'ue_view' ue.id %}">{{ue.titre}}</a> 
             {% endfor %}
 
       {% endif %}

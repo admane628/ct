@@ -9,3 +9,7 @@ def formation(request, id):
     fm = get_object_or_404(Formation, id=id)
     ues = UE.objects.filter(formations=fm)
     return render(request, "formation.html", {"formation": fm, "ues":ues})
+
+def ue_view(request, id):
+    u = get_object_or_404(UE, id=id)
+    return render(request, "ue_view.html", {"ue":u})
