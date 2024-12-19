@@ -1,0 +1,18 @@
+{% if formation %}
+
+  intitule: {{formation.intitule}}</br>
+  description: {{formation.description}}</br>
+  responsable: {{formation.responsable}}</br>
+
+</br>
+      {% if ues %}
+            {% for ue in ues %}
+              ue: {{ue.titre}}
+            {% endfor %}
+
+      {% endif %}
+
+{% else %}
+
+  Il n'y a pas de formation.
+{% endif %}

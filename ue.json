@@ -1,0 +1,1 @@
+[{"model": "uo.ue", "pk": 2, "fields": {"titre": "ue1", "description": "d1", "CM": 1, "TD": 1, "TP": 1, "credits": 30, "formations": [2, 4], "responsables": [2, 3]}}, {"model": "uo.ue", "pk": 3, "fields": {"titre": "t1", "description": "d", "CM": 1, "TD": 1, "TP": 1, "credits": 1, "formations": [2, 4], "responsables": [2, 3]}}]
