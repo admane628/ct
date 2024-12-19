@@ -1,0 +1,3 @@
+{% for f in fm %}
+  <a href="{% url 'formation' f.id %}">{{f.intitule}}</a> <br>
+{% endfor %}

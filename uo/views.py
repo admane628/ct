@@ -13,3 +13,11 @@ def formation(request, id):
 def ue_view(request, id):
     u = get_object_or_404(UE, id=id)
     return render(request, "ue_view.html", {"ue":u})
+
+def formations(request):
+    fm = Formation.objects.all()
+    return render(request, "formations.html", {"fm":fm})
+
+def ues(request):
+    ues = UE.objects.all()
+    return render(request, "ues.html", {"ues":ues})
